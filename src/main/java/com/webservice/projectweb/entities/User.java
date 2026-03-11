@@ -1,9 +1,15 @@
 package com.webservice.projectweb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
@@ -19,7 +25,12 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    public User (){
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
+
+    public User() {
 
     }
 
@@ -69,6 +80,11 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override
