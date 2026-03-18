@@ -37,4 +37,10 @@ public ResponseEntity<List<User>> findAll() {
                 .buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).body(obj);
     }
+
+    @DeleteMapping(value = "/{id}" )
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
